@@ -1,5 +1,5 @@
 # pfrng - Provably Fair Random Number Generator
-A library of [provably fair](https://en.wikipedia.org/wiki/Provably_fair_algorithm) random number generators and distributions.
+A library of [provably fair](https://en.wikipedia.org/wiki/Provably_fair_algorithm) random number generators, distributions and helpers.
 
 ## Usage
 
@@ -11,7 +11,10 @@ npm install pfrng
 ### Usage
 Example provably fair coin flipping game:
 ```js
-import { commitment, keyedMessage, nodeRandomByte, randomBit, randomByteFromHash, randomSHA512, sha3_512 } from 'pfrng';
+import {
+  commitment, keyedMessage, nodeRandomByte, randomBit,
+  randomByteFromHash, randomSHA512, sha3_512
+} from 'pfrng';
 
 // 1. Server generates a seed and send serverCommitment to client
 const serverSeed = randomSHA512(nodeRandomByte);
