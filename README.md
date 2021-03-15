@@ -1,14 +1,17 @@
+https://github.com/andykswong/pfrng/actions/workflows/build.yaml
+
 # pfrng - Provably Fair Random Number Generator
-A library of [provably fair](https://en.wikipedia.org/wiki/Provably_fair_algorithm) random number generators, distributions and helpers.
 
-## Usage
+> A library of [provably fair](https://en.wikipedia.org/wiki/Provably_fair_algorithm) random number generators, distributions and helpers.
 
-### Installation
+[![NPM](https://img.shields.io/npm/v/pfrng.svg)](https://www.npmjs.com/package/pfrng) [![build](https://github.com/andykswong/pfrng/actions/workflows/build.yaml/badge.svg)](https://github.com/andykswong/pfrng/actions/workflows/build.yaml)
+
+## Install
 ```shell
 npm install pfrng
 ```
 
-### Usage
+## Usage
 Example provably fair coin flipping game:
 ```js
 import {
@@ -42,3 +45,6 @@ console.log(`You ${isWinning ? 'win' : 'lose'}.`);
 
 ## API
 TODO
+
+## License
+This repository and the code inside it is licensed under the MIT License. Read [LICENSE](./LICENSE) for more information.
