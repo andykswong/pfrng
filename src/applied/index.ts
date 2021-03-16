@@ -1,2 +1,2 @@
-export * from './commitment';
-export * from './hash';
+export * from './coin';
+export * from './dice';

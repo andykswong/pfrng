@@ -1,4 +1,4 @@
-export * from './jssha3';
-export * from './jssha512';
-export * from './node';
+export * from './impl';
+export * from './commitment';
+export * from './keyed';
 export * from './types';

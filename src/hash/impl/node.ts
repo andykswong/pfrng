@@ -1,5 +1,5 @@
 import { createHash } from 'crypto';
-import { Hash } from './types';
+import { Hash } from '../types';
 
 function hash(message: string | Uint8Array, algorithm: 'sha384' | 'sha512' | 'sha3-384' | 'sha3-512'): Uint8Array {
   const hash = createHash(algorithm);
