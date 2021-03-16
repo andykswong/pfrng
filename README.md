@@ -2,7 +2,7 @@
 
 > A library of [provably fair](https://en.wikipedia.org/wiki/Provably_fair_algorithm) random number generators, distributions and helpers.
 
-[![NPM](https://img.shields.io/npm/v/pfrng.svg)](https://www.npmjs.com/package/pfrng) [![build](https://github.com/andykswong/pfrng/actions/workflows/build.yaml/badge.svg)](https://github.com/andykswong/pfrng/actions/workflows/build.yaml)
+[![NPM](https://img.shields.io/npm/v/pfrng)](https://www.npmjs.com/package/pfrng) [![build](https://github.com/andykswong/pfrng/actions/workflows/build.yaml/badge.svg)](https://github.com/andykswong/pfrng/actions/workflows/build.yaml)
 
 ## Install
 ```shell
