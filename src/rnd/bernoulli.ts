@@ -5,9 +5,10 @@ import { RandomBit } from './types';
  * @see https://arxiv.org/pdf/1304.1916.pdf
  */
 export function bernoulli(k: number, n: number): (randomBit: RandomBit) => boolean {
-  if (!Number.isInteger(n) || !Number.isInteger(k) || n < 1 || k < 0) {
-    throw new RangeError('k and n must be positive integers');
-  } else if (k >= n) {
+  console.assert(Number.isInteger(n)&& n > 0, 'n must be positive integer');
+  console.assert(Number.isInteger(k) && k >= 0, 'k must be non-negative integer');
+
+  if (k >= n) {
     return () => true;
   }
 

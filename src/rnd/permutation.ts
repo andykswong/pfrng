@@ -4,9 +4,7 @@ import { RandomUint } from './types';
  * Random permutation of an array of given length, using Fisher-Yates algorithm.
  */
 export function fisherYates(length: number): (randomUint: RandomUint) => number[] {
-  if (!Number.isInteger(length) || length < 0) {
-    throw new RangeError('length must be non-negative integer');
-  }
+  console.assert(Number.isInteger(length) && length >= 0, 'length must be non-negative integer');
 
   return (randomUint) => {
     const result: number[] = new Array(length);

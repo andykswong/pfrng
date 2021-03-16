@@ -12,15 +12,11 @@ export function fldr(weights: number[]): (randomBit: RandomBit) => number {
 
   for (let i = 0; i < n; ++i) {
     a[i] = weights[i];
-    if (!Number.isInteger(a[i]) || a[i] < 0) {
-      throw new RangeError('weights must be non-negative integers');
-    }
+    console.assert(Number.isInteger(a[i]) && a[i] >= 0, 'weights must be non-negative integers');
     m += a[i];
   }
 
-  if (m === 0) {
-    throw new RangeError('weight array must contain at least 1 positive integer');
-  }
+  console.assert(m > 0, 'weight array must contain at least 1 positive integer');
 
   const k = Math.ceil(Math.log2(m));
   a[n] = 2 ** k - m;

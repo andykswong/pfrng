@@ -13,7 +13,7 @@ npm install pfrng
 Example provably fair coin flipping game:
 ```js
 import {
-  commitment, keyedMessage, nodeRandomByte, randomBit,
+  CoinSide, commitment, flipCoin, keyedMessage, nodeRandomByte, randomBit,
   randomByteFromHash, randomSHA512, sha3_512
 } from 'pfrng';
 
@@ -27,12 +27,11 @@ const clientNumHeadsBet = 3;
 
 // 3. Server seeds the random generators with client + server seeds
 const randomByte = randomByteFromHash(sha3_512, keyedMessage(clientSeed, serverSeed));
-const flip = randomBit(randomByte);
 
 // 4. Server simulates the game
 let isWinning = true;
 for (let i = 0; i < clientNumHeadsBet; ++i) {
-  const isHead = flip();
+  const isHead = flipCoin(randomBit(randomByte)) === CoinSide.Head;
   isWinning = isWinning && isHead;
   console.log(`Coin flip ${i}: ${isHead ? 'head' : 'tail'}`);
 }

@@ -4,9 +4,7 @@ import { RandomBit, randomUint } from '../rnd';
  * Return a dice roller.
  */
 export function diceRoller(sides: number): (randomBit: RandomBit) => number {
-  if (!Number.isInteger(sides) || sides < 1) {
-    throw new RangeError('sides must be positive integer');
-  }
+  console.assert(Number.isInteger(sides) && sides > 0, 'sides must be positive integer');
   const urand = randomUint(sides);
   return (randomBit) => urand(randomBit) + 1;
 }
