@@ -36,10 +36,10 @@ export function randomByteFromHash(
   let buffer = hashFn();
 
   const randFn = () => {
-    while (stateObj.b >= buffer.byteLength) {
-      ++stateObj.n;
+    if ((stateObj.b >= buffer.length)) {
+      stateObj.n += Math.floor(stateObj.b / buffer.length);
+      stateObj.b %= buffer.length;
       buffer = hashFn();
-      stateObj.b -= buffer.byteLength;
     }
     return buffer[stateObj.b++];
   };

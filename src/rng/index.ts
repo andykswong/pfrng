@@ -1,4 +1,4 @@
 export * from './hash-stream';
-export * from './node';
+export * from './server';
 export * from './types';
 export * from './web';

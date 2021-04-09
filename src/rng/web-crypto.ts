@@ -5,6 +5,9 @@ const BUFFER_SIZE = 256;
 let buffer = new Uint8Array(0);
 let bytesAvailable = 0;
 
+/**
+ * Whether Web Crypto is available.
+ */
 export const hasWebCrypto = 'crypto' in globalThis;
 
 /**
@@ -15,7 +18,7 @@ export const hasWebCrypto = 'crypto' in globalThis;
 export const webCryptoRandomByte: RandomByte = () => {
   if (bytesAvailable <= 0) {
     buffer = crypto.getRandomValues(new Uint8Array(BUFFER_SIZE));
-    bytesAvailable = BUFFER_SIZE;
+    bytesAvailable = buffer.length;
   }
-  return buffer[BUFFER_SIZE - (bytesAvailable--)];
+  return buffer[buffer.length - (bytesAvailable--)];
 };

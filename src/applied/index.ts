@@ -1,2 +1,3 @@
 export * from './coin';
-export * from './dice';
+export * as dice from './dice';
+export { roller as diceRoller } from './dice';

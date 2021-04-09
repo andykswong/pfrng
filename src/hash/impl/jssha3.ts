@@ -14,9 +14,9 @@ function hash(message: string | Uint8Array, algorithm: 'SHA3-384' | 'SHA3-512' =
 /**
  * Compute the SHA3-512 hash of a given message.
  */
-export const jssha3_512: Hash = hash;
+export const sha3_512: Hash = hash;
 
 /**
  * Compute the SHA3-384 hash of a given message.
  */
-export const jssha3_384: Hash = (message: string | Uint8Array) => hash(message, 'SHA3-384');
+export const sha3_384: Hash = (message: string | Uint8Array) => hash(message, 'SHA3-384');

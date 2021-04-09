@@ -1,3 +1,4 @@
+import { assert } from '../assert';
 import { RandomBit } from './types';
 
 /**
@@ -5,8 +6,8 @@ import { RandomBit } from './types';
  * @see https://arxiv.org/pdf/1304.1916.pdf
  */
 export function bernoulli(k: number, n: number): (randomBit: RandomBit) => boolean {
-  console.assert(Number.isInteger(n)&& n > 0, 'n must be positive integer');
-  console.assert(Number.isInteger(k) && k >= 0, 'k must be non-negative integer');
+  assert(Number.isInteger(n)&& n > 0, 'n must be positive integer');
+  assert(Number.isInteger(k) && k >= 0, 'k must be non-negative integer');
 
   if (k >= n) {
     return () => true;

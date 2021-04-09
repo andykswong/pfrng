@@ -1,22 +1,28 @@
+import { assert } from '../assert';
 import { RandomBit } from './types';
 
 /**
  * Implementation of the fast loaded dice roller algorithm.
- * Given positive integers weights[i], returns random integer i with probability (weight[i]s / sum(weights)).
+ * Given positive integers weights[i], returns random integer i with probability (weights[i] / sum(weights)).
  * @see https://arxiv.org/pdf/2003.03830.pdf
+ * @internal
  */
 export function fldr(weights: number[]): (randomBit: RandomBit) => number {
   const n = weights.length;
+  assert(n > 0, 'weights must not be empty');
+
   const a: number[] = new Array(n + 1);
   let m = 0;
 
   for (let i = 0; i < n; ++i) {
     a[i] = weights[i];
-    console.assert(Number.isInteger(a[i]) && a[i] >= 0, 'weights must be non-negative integers');
+    assert(Number.isInteger(a[i]) && a[i] > 0, 'weights must be positive integers');
     m += a[i];
   }
 
-  console.assert(m > 0, 'weight array must contain at least 1 positive integer');
+  if (n === 1) {
+    return () => 0;
+  }
 
   const k = Math.ceil(Math.log2(m));
   a[n] = 2 ** k - m;
@@ -55,6 +61,7 @@ export function fldr(weights: number[]): (randomBit: RandomBit) => number {
 }
 
 /**
- * Returns a random choice from items of given positive integer weights
+ * Returns a random choice from items of given positive integer weights.
+ * @see https://arxiv.org/pdf/2003.03830.pdf
  */
 export const randomChoice = fldr;

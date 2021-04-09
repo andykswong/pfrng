@@ -1,6 +1,6 @@
 {
   "name": "pfrng",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Provably Fair Random Number Generator",
   "homepage": "https://github.com/andykswong/pfrng",
   "author": "Andy K.S. Wong <andykswong@outlook.com>",
@@ -18,7 +18,8 @@
   "typings": "./dist/index.d.ts",
   "exports": "./dist/index",
   "files": [
-    "/dist"
+    "/dist",
+    "/src"
   ],
   "scripts": {
     "prepublishOnly": "npm run build && npm test",
@@ -49,13 +50,15 @@
   },
   "jest": {
     "preset": "ts-jest/presets/js-with-ts",
+    "testEnvironment": "node",
     "rootDir": "src",
-    "testRegex": ".*\\.spec\\.tsx?$",
     "collectCoverage": true,
+    "coverageDirectory": "../coverage",
     "collectCoverageFrom": [
       "**/*.{ts,tsx}"
     ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "setupFiles": [
+      "./test/jest.setup.ts"
+    ]
   }
 }

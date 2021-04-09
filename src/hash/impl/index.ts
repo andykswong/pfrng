@@ -1,3 +1,2 @@
-export * from './jssha3';
-export * from './jssha512';
-export * from './node';
+export * as jssha from './jssha';
+export * as sha from './node';

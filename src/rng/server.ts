@@ -11,10 +11,10 @@ let bytesAvailable = 0;
  * A CSPRNG function that relies on the node-available `crypto.randomBytes` method to generate random bytes.
  * See https://nodejs.org/api/crypto.html#crypto_crypto_randombytes_size_callback
  */
-export const nodeRandomByte: RandomByte = () => {
+export const serverRandomByte: RandomByte = () => {
   if (bytesAvailable <= 0) {
     buffer = randomBytes(BUFFER_SIZE);
-    bytesAvailable = BUFFER_SIZE;
+    bytesAvailable = buffer.length;
   }
-  return buffer[BUFFER_SIZE - (bytesAvailable--)];
+  return buffer[buffer.length - (bytesAvailable--)];
 };

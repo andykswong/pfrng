@@ -3,3 +3,4 @@ export * from './encoding';
 export * from './hash';
 export * from './rnd';
 export * from './rng';
+export * from './assert';

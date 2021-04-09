@@ -1,3 +1,4 @@
+import { assert } from '../assert';
 import { toHex } from '../encoding';
 import { RandomByte } from '../rng';
 
@@ -5,7 +6,7 @@ import { RandomByte } from '../rng';
  * Generate random hex string with given byte length.
  */
 export function randomHex(byteLength: number): (randomByte: RandomByte) => string {
-  console.assert(Number.isInteger(byteLength) && byteLength >= 0, 'byteLength must be non-negative integer');
+  assert(Number.isInteger(byteLength) && byteLength >= 0, 'byteLength must be non-negative integer');
 
   return (randomByte) => {
     const bytes = new Uint8Array(byteLength);
