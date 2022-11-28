@@ -1,4 +1,6 @@
+import { jest } from '@jest/globals';
 import { randomPermutation, permute } from '../permutation';
+import { RandomUint } from '../types';
 
 describe('randomPermutation', () => {
   test.each([-1, 1.5])(
@@ -17,7 +19,7 @@ describe('randomPermutation', () => {
     (length, randomUints, expectedResult) => {
       const mockRandomUint = jest.fn();
       randomUints.forEach(mockRandomUint.mockReturnValueOnce);
-      expect(randomPermutation(length)(mockRandomUint)).toEqual(expectedResult);
+      expect(randomPermutation(length)(mockRandomUint as RandomUint)).toEqual(expectedResult);
       expect(mockRandomUint).toBeCalledTimes(length);
     }
   );

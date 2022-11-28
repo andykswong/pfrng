@@ -14,7 +14,8 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "env": {
-    "es2020": true,
+    "es2022": true,
+    "browser": true,
     "node": true,
     "jest": true
   },
@@ -24,7 +25,6 @@
       {
         "ts-expect-error": "allow-with-description"
       }
-    ],
-    "@typescript-eslint/no-non-null-assertion": "off"
+    ]
   }
 }

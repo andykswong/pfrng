@@ -1,3 +1,5 @@
+import { jest } from '@jest/globals';
+import { Hash } from '../../hash';
 import { randomByteFromHash } from '../hash-stream';
 
 describe('randomByteFromHash', () => {
@@ -9,7 +11,7 @@ describe('randomByteFromHash', () => {
     const mockHash = jest.fn();
     BYTE_CHUNKS.forEach(mockHash.mockReturnValueOnce);
 
-    const randFn = randomByteFromHash(mockHash, SEED);
+    const randFn = randomByteFromHash(mockHash as Hash, SEED);
 
     for (let i = 0; i < BYTES.length; ++i) {
       expect(randFn()).toBe(BYTES[i]);
@@ -25,7 +27,7 @@ describe('randomByteFromHash', () => {
     const mockHash = jest.fn();
     mockHash.mockReturnValueOnce(BYTE_CHUNKS[1])
 
-    const randFn = randomByteFromHash(mockHash, SEED, state);
+    const randFn = randomByteFromHash(mockHash as Hash, SEED, state);
     expect(randFn()).toBe(BYTES[3]);
 
     expect(mockHash).toBeCalledTimes(1);

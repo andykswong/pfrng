@@ -1,4 +1,6 @@
+import { jest } from '@jest/globals';
 import { bernoulli } from '../bernoulli';
+import { RandomBit } from '../types';
 
 describe('bernoulli', () => {
   test.each([[1, 0], [1, -1], [1, 1.5], [-1, 1], [1.2, 2]])(
@@ -10,7 +12,7 @@ describe('bernoulli', () => {
     'given k = %p >= n = %p, always returns true',
     (k, n) => {
       const mockRandomBit = jest.fn();
-      expect(bernoulli(k, n)(mockRandomBit)).toBe(true);
+      expect(bernoulli(k, n)(mockRandomBit as RandomBit)).toBe(true);
       expect(mockRandomBit).not.toBeCalled();
     }
   );
@@ -29,7 +31,7 @@ describe('bernoulli', () => {
     (k, n, randomBits, expectedResult) => {
       const mockRandomBit = jest.fn();
       randomBits.forEach(mockRandomBit.mockReturnValueOnce);
-      expect(bernoulli(k, n)(mockRandomBit)).toBe(expectedResult);
+      expect(bernoulli(k, n)(mockRandomBit as RandomBit)).toBe(expectedResult);
       expect(mockRandomBit).toBeCalledTimes(randomBits.length);
     }
   );

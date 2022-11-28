@@ -1,5 +1,4 @@
-import { randomBytes } from 'crypto';
-
+import crypto from 'crypto';
 import type { RandomByte } from './types';
 
 const BUFFER_SIZE = 256;
@@ -13,7 +12,7 @@ let bytesAvailable = 0;
  */
 export const serverRandomByte: RandomByte = () => {
   if (bytesAvailable <= 0) {
-    buffer = randomBytes(BUFFER_SIZE);
+    buffer = crypto.randomBytes(BUFFER_SIZE);
     bytesAvailable = buffer.length;
   }
   return buffer[buffer.length - (bytesAvailable--)];

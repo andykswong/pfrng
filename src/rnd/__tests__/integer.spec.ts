@@ -1,4 +1,6 @@
+import { jest } from '@jest/globals';
 import { randomUint, randomInt } from '../integer';
+import { RandomBit } from '../types';
 
 describe('randomUint', () => {
   test.each([0, -1, 2.5])(
@@ -21,7 +23,7 @@ describe('randomUint', () => {
     (n, randomBits, expectedResult) => {
       const mockRandomBit = jest.fn();
       randomBits.forEach(mockRandomBit.mockReturnValueOnce);
-      expect(randomUint(n)(mockRandomBit)).toBe(expectedResult);
+      expect(randomUint(n)(mockRandomBit as RandomBit)).toBe(expectedResult);
       expect(mockRandomBit).toBeCalledTimes(randomBits.length);
     }
   );
@@ -42,7 +44,7 @@ describe('randomInt', () => {
     (min, max, randomBits, expectedResult) => {
       const mockRandomBit = jest.fn();
       randomBits.forEach(mockRandomBit.mockReturnValueOnce);
-      expect(randomInt(min, max)(mockRandomBit)).toBe(expectedResult);
+      expect(randomInt(min, max)(mockRandomBit as RandomBit)).toBe(expectedResult);
       expect(mockRandomBit).toBeCalledTimes(randomBits.length);
     }
   );

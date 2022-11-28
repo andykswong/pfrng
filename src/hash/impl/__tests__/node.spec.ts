@@ -1,4 +1,4 @@
-import { HashData } from '../../../test/data';
+import { HashData } from './data';
 import { toHex } from '../../../encoding';
 import { sha384, sha512, sha3_384, sha3_512 } from '../node';
 

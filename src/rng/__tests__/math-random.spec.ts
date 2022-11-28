@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { mathRandomByte } from '../math-random';
 
 jest.spyOn(global.Math, 'random');

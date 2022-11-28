@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { webCryptoRandomByte } from '../web-crypto';
 
 const EXPECTED_BUFFER_SIZE = 256;
@@ -6,7 +7,8 @@ const getRandomValues = jest.fn();
 
 global.crypto = {
   subtle: <SubtleCrypto>{},
-  getRandomValues
+  getRandomValues: getRandomValues as <T extends ArrayBufferView | null>(array: T) => T,
+  randomUUID: () => '',
 };
 
 describe('webCryptoRandomByte', () => {

@@ -1,5 +1,3 @@
-/* istanbul ignore file */
-
 const abc = new Uint8Array([0x61, 0x62, 0x63]);
 
 export const HashData = {

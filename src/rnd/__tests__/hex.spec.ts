@@ -1,3 +1,5 @@
+import { jest } from '@jest/globals';
+import { RandomByte } from '../../rng';
 import { randomHex } from '../hex';
 
 describe('randomHex', () => {
@@ -15,7 +17,7 @@ describe('randomHex', () => {
     (byteLength, randomBytes, expectedResult) => {
       const mockRandomByte = jest.fn();
       randomBytes.forEach(mockRandomByte.mockReturnValueOnce);
-      expect(randomHex(byteLength)(mockRandomByte)).toBe(expectedResult);
+      expect(randomHex(byteLength)(mockRandomByte as RandomByte)).toBe(expectedResult);
       expect(mockRandomByte).toBeCalledTimes(byteLength);
     }
   );

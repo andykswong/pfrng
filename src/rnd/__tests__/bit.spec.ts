@@ -1,3 +1,5 @@
+import { jest } from '@jest/globals';
+import { RandomByte } from '../../rng';
 import { randomBit } from '../bit';
 
 describe('randomBit', () => {
@@ -8,7 +10,7 @@ describe('randomBit', () => {
     const mockRandomByte = jest.fn();
     BYTES.forEach(mockRandomByte.mockReturnValueOnce);
 
-    const fn = randomBit(mockRandomByte);
+    const fn = randomBit(mockRandomByte as RandomByte);
     for (let i = 0; i < BITS.length; ++i) {
       expect(fn()).toBe(!!BITS[i]);
       expect(mockRandomByte).toBeCalledTimes((1 + i/8)|0);
