@@ -1,6 +1,6 @@
 {
   "name": "pfrng",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Provably Fair Random Number Generator",
   "homepage": "https://github.com/andykswong/pfrng",
   "author": "Andy K.S. Wong <andykswong@outlook.com>",
