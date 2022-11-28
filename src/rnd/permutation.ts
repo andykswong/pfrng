@@ -1,30 +1,24 @@
 import { assert } from '../assert';
-import { RandomUint } from './types';
+import { BitIterator } from '../types';
+import { randomUint } from './integer';
 
 /**
- * Random permutation of an array of given length, using Fisher-Yates algorithm.
- * @internal
+ * Returns random permutation for a list of items of given length, using Fisher-Yates algorithm.
  */
-export function fisherYates(length: number): (randomUint: RandomUint) => number[] {
+export function randomPermutation(randomBits: BitIterator, length: number): number[] {
   assert(Number.isInteger(length) && length >= 0, 'length must be non-negative integer');
 
-  return (randomUint) => {
-    const result: number[] = new Array(length);
-    for (let i = 0; i < length; ++i) {
-      const j = randomUint(i + 1);
-      if (i !== j) {
-        result[i] = result[j];
-      }
-      result[j] = i;
+  const result: number[] = new Array(length);
+  for (let i = 0; i < length; ++i) {
+    const j = randomUint(randomBits, i + 1);
+    if (i !== j) {
+      result[i] = result[j];
     }
-    return result;
-  };
-}
+    result[j] = i;
+  }
 
-/**
- * Random permutation of an array of given length, using Fisher-Yates algorithm.
- */
-export const randomPermutation = fisherYates;
+  return result;
+}
 
 /**
  * Shuffle a data array in place using the given permutation.

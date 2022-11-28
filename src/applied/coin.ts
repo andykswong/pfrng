@@ -1,4 +1,5 @@
-import { RandomBit } from '../rnd';
+import { assert } from '../assert';
+import { BitIterator } from '../types';
 
 /**
  * Result of a coin flip.
@@ -11,6 +12,8 @@ export enum CoinSide {
 /**
  * Flip a coin.
  */
-export function flipCoin(randomBit: RandomBit): CoinSide {
-  return randomBit() ? CoinSide.Head : CoinSide.Tail;
+export function flipCoin(randomBits: BitIterator): CoinSide {
+  const result = randomBits.next();
+  assert(!result.done, 'not enough random bits');
+  return result.value ? CoinSide.Head : CoinSide.Tail;
 }

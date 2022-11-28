@@ -1,11 +1,19 @@
 import { jest } from '@jest/globals';
-import { mathRandomByte } from '../math-random';
+import { mathRandomBytes } from '../math-random';
 
 jest.spyOn(global.Math, 'random');
 
-describe('mathRandomByte', () => {
-  it('should return random byte from Math.random', () => {
-    (Math.random as jest.Mock).mockReturnValueOnce(0.17);
-    expect(mathRandomByte()).toBe(43); // floor(0.17 * 256) = 43
+describe('mathRandomBytes', () => {
+  it('should return random bytes from Math.random', () => {
+    jest.mocked(Math.random)
+      .mockReturnValueOnce(0.17)
+      .mockReturnValueOnce(0.3);
+    
+    const expected = [
+      43, // floor(0.17 * 256) = 43
+      76, // floor(0.3 * 256) = 76
+    ];
+
+    expect(Array.from(mathRandomBytes(2))).toStrictEqual(expected);
   });
 });

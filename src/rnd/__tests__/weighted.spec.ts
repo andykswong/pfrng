@@ -1,5 +1,3 @@
-import { jest } from '@jest/globals';
-import { RandomBit } from '../types';
 import { randomChoice } from '../weighted';
 
 describe('randomChoice', () => {
@@ -20,10 +18,7 @@ describe('randomChoice', () => {
   ])(
     'given weights = %p, random bits = %p, returns %p',
     (weights, randomBits, expectedResult) => {
-      const mockRandomBit = jest.fn();
-      randomBits.forEach(mockRandomBit.mockReturnValueOnce);
-      expect(randomChoice(weights)(mockRandomBit as RandomBit)).toBe(expectedResult);
-      expect(mockRandomBit).toBeCalledTimes(randomBits.length);
+      expect(randomChoice(weights)(randomBits.values())).toBe(expectedResult);
     }
   );
 });

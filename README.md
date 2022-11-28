@@ -13,25 +13,28 @@ npm install pfrng
 Example provably fair coin flipping game:
 ```js
 import {
-  CoinSide, commitment, flipCoin, keyedMessage, randomBit,
-  randomByteFromHash, randomSHA512, serverRandomByte, sha
-} from 'pfrng';
+  bitIter, CoinSide, commitment, flipCoin, keyedMessage, 
+  nodeCryptoRandomBytes, nodeHash, randomBytesFromHash, sha512Iter
+} from '.';
 
 // 1. Server generates a seed and send serverCommitment to client
-const serverSeed = randomSHA512(nodeRandomByte);
-const serverCommitment = commitment(sha.sha3_512, serverSeed);
+const serverRandomIter = sha512Iter(nodeCryptoRandomBytes());
+const serverSeed = serverRandomIter.next().value;
+const serverCommitment = commitment(nodeHash.sha3_512, serverSeed);
 
 // 2. Client generates a seed and places a bet
-const clientSeed = randomSHA512(nodeRandomByte);
+const clientRandomIter = sha512Iter(nodeCryptoRandomBytes());
+const clientSeed = clientRandomIter.next().value;
 const clientNumHeadsBet = 3;
 
 // 3. Server seeds the random generators with client + server seeds
-const randomByte = randomByteFromHash(sha.sha3_512, keyedMessage(clientSeed, serverSeed));
+const randomBytes = randomBytesFromHash(nodeHash.sha3_512, keyedMessage(clientSeed, serverSeed));
+const randomBits = bitIter(randomBytes);
 
 // 4. Server simulates the game
 let isWinning = true;
 for (let i = 0; i < clientNumHeadsBet; ++i) {
-  const isHead = flipCoin(randomBit(randomByte)) === CoinSide.Head;
+  const isHead = flipCoin(randomBits) === CoinSide.Head;
   isWinning = isWinning && isHead;
   console.log(`Coin flip ${i}: ${isHead ? 'head' : 'tail'}`);
 }

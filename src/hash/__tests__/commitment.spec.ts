@@ -1,6 +1,6 @@
 import { jest } from '@jest/globals';
 import { commitment } from '../commitment';
-import { Hash } from '../types';
+import { Hash } from '../../types';
 
 describe('commitment', () => {
   it('should hash given message', () => {

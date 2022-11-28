@@ -1,5 +1,5 @@
 import { toHex } from '../encoding';
-import { Hash } from './types';
+import { Hash } from '../types';
 
 /**
  * Returns the commitment of given salted message as a hash.

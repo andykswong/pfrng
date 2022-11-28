@@ -1,5 +1,5 @@
 import jsSHA from 'jssha/dist/sha3';
-import { Hash } from '../types';
+import { Hash } from '../../types';
 
 function hash(message: string | Uint8Array, algorithm: 'SHA3-384' | 'SHA3-512' = 'SHA3-512'): Uint8Array {
   const shaObj = (message instanceof Uint8Array) ?

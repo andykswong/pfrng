@@ -1,15 +1,19 @@
 import { assert } from '../assert';
-import { RandomBit } from './types';
+import { BitIterator } from '../types';
 
 /**
- * Implementation of the fast loaded dice roller algorithm.
- * Given positive integers weights[i], returns random integer i with probability (weights[i] / sum(weights)).
+ * Returns a random choice `i` from items of given positive integer `weights[i]`
+ * with probability `weights[i] / sum(weights)`.
+ * This implements the fast loaded dice roller algorithm.
  * @see https://arxiv.org/pdf/2003.03830.pdf
- * @internal
  */
-export function fldr(weights: number[]): (randomBit: RandomBit) => number {
+export function randomChoice(weights: number[]): (randomBits: BitIterator) => number {
   const n = weights.length;
   assert(n > 0, 'weights must not be empty');
+
+  if (n <= 1) { // handles edge case of 1 choice
+    return () => 0;
+  }
 
   const a: number[] = new Array(n + 1);
   let m = 0;
@@ -18,10 +22,6 @@ export function fldr(weights: number[]): (randomBit: RandomBit) => number {
     a[i] = weights[i];
     assert(Number.isInteger(a[i]) && a[i] > 0, 'weights must be positive integers');
     m += a[i];
-  }
-
-  if (n === 1) {
-    return () => 0;
   }
 
   const k = Math.ceil(Math.log2(m));
@@ -37,15 +37,19 @@ export function fldr(weights: number[]): (randomBit: RandomBit) => number {
     }
   }
 
-  return randomBit => {
+  return randomBits => {
     let d = 0;
     let c = 0;
 
-    for (; ;) {
-      d = 2 * d + (1 - (randomBit() ? 1 : 0));
+    let done = false;
+    while (!done) {
+      const result = randomBits.next();
+      assert(!(done = !!result.done), 'not enough random bits');
+
+      d = 2 * d + (1 - (result.value ? 1 : 0));
       if (d < h[c].length) {
         if (h[c][d] < n) {
-          break;
+          done = true;
         } else {  // Out of range, restart
           d = 0;
           c = 0;
@@ -59,9 +63,3 @@ export function fldr(weights: number[]): (randomBit: RandomBit) => number {
     return h[c][d];
   };
 }
-
-/**
- * Returns a random choice from items of given positive integer weights.
- * @see https://arxiv.org/pdf/2003.03830.pdf
- */
-export const randomChoice = fldr;

@@ -1,8 +1,9 @@
-import { hasWebCrypto, webCryptoRandomByte } from './web-crypto';
-import { mathRandomByte } from './math-random';
-import { RandomByte } from './types';
+import { hasWebCrypto, webCryptoRandomBytes } from './web-crypto';
+import { mathRandomBytes } from './math-random';
+import type { NumberIterator } from '../types';
 
 /**
- * RandomByte implementation for the Web.
+ * A random byte iterator implementation for the Web that uses `crypto.getRandomValues` if available,
+ * and falls back to `Math.random` otherwise.
  */
-export const webRandomByte: RandomByte = hasWebCrypto ? webCryptoRandomByte : mathRandomByte;
+export const webRandomBytes: (length?: number) => NumberIterator = hasWebCrypto ? webCryptoRandomBytes : mathRandomBytes;
